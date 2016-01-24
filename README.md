@@ -1,6 +1,5 @@
 # lib.js
-
-A *very*, *very*, *very* small JavaScript library for small tasks.
+A *very*, *very*, *very* small JavaScript library for small tasks. No support for older browsers.
 
 # Documentation
     create(element[String])
