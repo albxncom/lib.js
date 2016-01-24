@@ -48,8 +48,12 @@ lib = {
     *           1. Runs the function[Function] as soon as the DOM is ready. 
     *
     *       ajax(object[obj])
-    *           1. The object[obj] should contain these properties: method[String], url[String], 
-    *              onload[Function]. 
+    *           1. The object[obj] should contain these properties: 
+    *               - method[String]
+    *               - url[String]
+    *               - optional: async[Boolean], default: 1
+    *               - optional: post parameters, { "param1" : "value1", ... }
+    *               - optional: onload[Function]
     *           
     */
    
@@ -120,10 +124,25 @@ lib = {
 
     ajax : function(data){
         var req = new XMLHttpRequest();
-        req.open(data.method, data.url);
-        req.onload = function(){
-            data.onload(this);
+        var async = data.async || true;
+
+        req.open(data.method, data.url, data.async);
+
+        if(data.onload){
+            req.onload = function(){
+                data.onload(this);
+            }
         }
-        req.send();
+
+        if(data.params){
+            var params = new FormData();
+            for(var prop in data.params){
+                params.append(prop, data.params[prop])
+            }
+            req.send(params);
+        }
+        else {
+            req.send();
+        }
     }
 }
