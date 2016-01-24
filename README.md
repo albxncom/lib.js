@@ -2,6 +2,7 @@
 A *very*, *very*, *very* small JavaScript library for small tasks. No support for older browsers.
 
 File size minified: ~1.05 KB
+
 File size gzipped: ~554 bytes
 
 # Documentation
